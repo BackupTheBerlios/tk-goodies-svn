@@ -1,0 +1,29 @@
+SHELL       = @SHELL@
+prefix      = @prefix@
+exec_prefix = @exec_prefix@
+bindir      = @bindir@
+libdir      = @libdir@
+
+TCL_BIN_DIR = @TCL_BIN_DIR@
+TCL_SRC_DIR = @TCL_SRC_DIR@
+
+all:
+	@echo "type 'make install' as a super-user to install tk-goodies packages."
+	@echo "type 'make uninstall' as a super-user to remove tk-goodies packages."
+
+install-icons:
+	mkdir -p ${libdir}/icons
+	cp -a icons/* ${libdir}/icons/
+
+install-dialogs:
+	mkdir -p ${libdir}/dialogs
+	cp -a dialogs/* ${libdir}/dialogs/
+
+install: install-icons install-dialogs
+
+uninstall: 
+	rm -rf  ${libdir}/icons
+	rm -rf  ${libdir}/dialogs
+
+clean:
+	rm Makefile

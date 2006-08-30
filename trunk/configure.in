@@ -1,0 +1,38 @@
+#!/bin/bash -norc
+dnl	This file is an input file used by the GNU "autoconf" program to
+dnl	generate the file "configure", which is run during Tcl installation
+dnl	to configure the system for the local environment.
+#
+# RCS: @(#) $Id: configure.in,v 1.46 2006/01/23 19:18:55 hobbs Exp $
+
+AC_INIT([yaacs], [2.0])
+
+#--------------------------------------------------------------------
+# Call TEA_INIT as the first TEA_ macro to set up initial vars.
+# This will define a ${TEA_PLATFORM} variable == "unix" or "windows"
+# as well as PKG_LIB_FILE and PKG_STUB_LIB_FILE.
+#--------------------------------------------------------------------
+
+TEA_INIT([3.5])
+
+AC_CONFIG_AUX_DIR(tclconfig)
+
+#--------------------------------------------------------------------
+# Load the tclConfig.sh file
+#--------------------------------------------------------------------
+
+TEA_PATH_TCLCONFIG
+TEA_LOAD_TCLCONFIG
+
+#-----------------------------------------------------------------------
+# Handle the --prefix=... option by defaulting to what Tcl gave.
+# Must be called after TEA_LOAD_TCLCONFIG and before TEA_SETUP_COMPILER.
+#-----------------------------------------------------------------------
+
+TEA_PREFIX
+
+#--------------------------------------------------------------------
+# Finally, substitute all of the various values into the Makefile.
+#--------------------------------------------------------------------
+
+AC_OUTPUT([Makefile])

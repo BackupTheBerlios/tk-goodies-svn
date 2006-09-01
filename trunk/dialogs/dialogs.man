@@ -1,0 +1,145 @@
+[manpage_begin dialogs n 0.1]
+[copyright {2006, Matteo Centenaro <bugant@users.berlios.de>}]
+[moddesc   {Dialogs library}]
+[titledesc {Dialogs window library}]
+[require icons]
+[require dialogs [opt 0.1]]
+[description]
+[para]
+
+This package provides commands to let you show a GUI's user
+messages using dialog windows.
+
+[section COMMANDS]
+[list_begin definitions]
+[call [cmd ::dialogs::alert] [arg w] [arg type] [arg btSel] [arg buttons] [arg alertTxt] [opt [arg infoTxt]]]
+
+Build a modal alert dialog window and pop it out setting a local grab.
+The modal-dialog window will be named after [arg w] and will display an
+icon as specified by its [arg type]. The [arg btSel]-th button
+will be the default button. Via [arg buttons] you specify buttons to be
+shown; [arg alertTxt] is the main text to be shown on the window, an informative
+text could be provided via [arg infoTxt].
+Usage of [cmd ::dialos::alert] has to be moderate, use it only to create your
+own dialog's type. Use the specific command for common dialogs.
+The command returns the index of the button choosed to dismiss the alert.
+
+[nl]
+TYPES
+[nl]
+
+Valid values for [arg type] are defined in dialogs package as constants named
+after the dialog purpose:
+[list_begin bullet]
+[bullet]
+::dialogs::typeAlertError define an error dialog
+[bullet]
+::dialogs::typeAlertWarning define a warning dialog
+[bullet]
+::dialogs::typeAlertInfo define an info dialog
+[bullet]
+::dialogs::typeAlertAuth define an authentication dialog
+[list_end]
+
+[nl]
+BUTTONS
+[nl]
+
+You can customizing buttons defining an array describing them.
+Array's keys is each button's position index (0 is the left most one)
+and each element is a list composed by button's text and icons.
+
+[call [cmd ::dialogs::error] [arg parent] [arg alertMsg] [opt [arg infoMsg]] [opt [arg buttons]]]
+
+Display an error alert when a user-requested operation
+cannot be sucessfully completed or whenever you want to
+signal a critical situation. By default it contains an
+error icon, an alert message ([arg alertMsg]) and its
+details ([opt [arg infoMsg]]) and an ok button
+(button's text will be translated using [cmd mc] command
+if available). The dialog will be created as [arg parent]'s child.
+You can customize button(s) shown specifing a value for
+[arg buttons] as described early in BUTTONS.
+It returns the index of the button used to dismiss the dialog.
+
+[call [cmd ::dialogs::warning] [arg parent] [arg alertMsg] [opt [arg infoMsg]] [opt [arg okTxt]][opt [arg buttons]]]
+
+Present a confirmation alert when the user's command
+may destroy their data, create a security risk or such.
+By default it contains a warning icon, an alert message
+([arg alertMsg]), its details ([opt [arg infoMsg]]) and
+two buttons: cancel and ok (ok button's text will be
+provided by the user via [arg okTxt] argument), if the
+user dosen't specify it ok will be used. As for
+[cmd ::dialogs::error] [cmd mc] command will used to
+translate "fixed" (i.e. not provided by the user)
+text buttons. The dialog will be created as [arg parent]'s
+child.
+You can customize button(s) shown specifing a value for
+[arg buttons] as described early in BUTTONS.
+It returns the index of the button used to dismiss the dialog.
+
+[call [cmd ::dialogs::info] [arg parent] [arg alertMsg] [opt [arg infoMsg]] [opt [arg buttons]]]
+
+Present an information alert, use it when the user must
+know the information presented before continuing, or has
+specifically requested the information.
+By default it contains an information icon, a message
+([arg alertMsg]), its details ([opt [arg infoMsg]]) and an
+ok button. The dialog will be created as [arg parent]'s child.
+You can customize button(s) shown specifing a value for
+[arg buttons] as described early in BUTTONS.
+It returns the index of the button used to dismiss the dialog.
+
+[call [cmd ::dialogs::confirmsave] [arg parent] [arg alertMsg] [opt [arg infoMsg]] [opt [arg buttons]]]
+
+Present a save confirmation alert.
+Save confirmation alerts help ensure that users do not
+lose document changes when they close applications. This
+makes closing applications a less dangerous operation.
+By default it contains a warning icon, an alert message ([arg alertMsg]),
+its details ([opt [arg infoMsg]]) and three buttons: 
+'Close without Saving', 'Cancel' and 'Save'. The dialog
+will be created as [arg parent]'s child.
+You can customize button(s) shown specifing a value for
+[arg buttons] as described early in BUTTONS.
+It returns the index of the button used to dismiss the dialog.
+
+[call [cmd ::dialogs::auth] [arg parent] [arg alertMsg] [opt [arg infoMsg]] \
+	[opt [arg userName]] [opt [arg loginTxt]] [opt [arg buttons]]]
+
+Authentication alerts prompt the user for information
+necessary to gain access to protected resources, such
+as their username or password.
+The dialog will be created as [arg parent]'s child.
+Using [arg loginTxt] you can set the 'ok' button text, by
+default it'll be setted to 'Login'.
+You can customize button(s) shown specifing a value for
+[arg buttons] as described early in BUTTONS.
+It returns the index of the button used to dismiss the dialog.
+
+[call [cmd ::dialogs::getIconsTheme]]
+
+Returns the current icons theme used while building
+dialog's icons.
+
+[call [cmd ::dialogs::setIconsTheme] [arg theme]]
+
+Set the icons theme to be used while building dialog's icons.
+
+[list_end]
+
+[section EXAMPLES]
+A simple example follows. Here an info dialog
+will drawn as .'s child to inform you that you've
+an appointment with Franz.
+
+[para]
+
+[example {
+   package require dialogs
+   ::dialogs::info . "You've an appointment with Franz"
+}]
+
+[keywords dialogs]
+[manpage_end]

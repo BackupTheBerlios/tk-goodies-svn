@@ -1,0 +1,153 @@
+'\"
+'\" Generated from file 'dialogs.man' by tcllib/doctools with format 'nroff'
+'\" Copyright (c) 2006, Matteo Centenaro <bugant@users.berlios.de>
+'\"
+.so man.macros
+.TH "dialogs" n 0.1 dialogs "Dialogs library"
+.BS
+.SH "NAME"
+dialogs \- Dialogs window library
+.SH "SYNOPSIS"
+package require \fBicons \fR
+.sp
+package require \fBdialogs  ?0.1?\fR
+.sp
+\fB::dialogs::alert\fR \fIw\fR \fItype\fR \fIbtSel\fR \fIbuttons\fR \fIalertTxt\fR ?\fIinfoTxt\fR?
+.sp
+\fB::dialogs::error\fR \fIparent\fR \fIalertMsg\fR ?\fIinfoMsg\fR? ?\fIbuttons\fR?
+.sp
+\fB::dialogs::warning\fR \fIparent\fR \fIalertMsg\fR ?\fIinfoMsg\fR? ?\fIokTxt\fR??\fIbuttons\fR?
+.sp
+\fB::dialogs::info\fR \fIparent\fR \fIalertMsg\fR ?\fIinfoMsg\fR? ?\fIbuttons\fR?
+.sp
+\fB::dialogs::confirmsave\fR \fIparent\fR \fIalertMsg\fR ?\fIinfoMsg\fR? ?\fIbuttons\fR?
+.sp
+\fB::dialogs::auth\fR \fIparent\fR \fIalertMsg\fR ?\fIinfoMsg\fR? ?\fIuserName\fR? ?\fIloginTxt\fR? ?\fIbuttons\fR?
+.sp
+\fB::dialogs::getIconsTheme\fR
+.sp
+\fB::dialogs::setIconsTheme\fR \fItheme\fR
+.sp
+.BE
+.SH "DESCRIPTION"
+.PP
+This package provides commands to let you show a GUI's user
+messages using dialog windows.
+.SH "COMMANDS"
+.TP
+\fB::dialogs::alert\fR \fIw\fR \fItype\fR \fIbtSel\fR \fIbuttons\fR \fIalertTxt\fR ?\fIinfoTxt\fR?
+Build a modal alert dialog window and pop it out setting a local grab.
+The modal-dialog window will be named after \fIw\fR and will display an
+icon as specified by its \fItype\fR. The \fIbtSel\fR-th button
+will be the default button. Via \fIbuttons\fR you specify buttons to be
+shown; \fIalertTxt\fR is the main text to be shown on the window, an informative
+text could be provided via \fIinfoTxt\fR.
+Usage of \fB::dialos::alert\fR has to be moderate, use it only to create your
+own dialog's type. Use the specific command for common dialogs.
+The command returns the index of the button choosed to dismiss the alert.
+.sp
+TYPES
+.sp
+Valid values for \fItype\fR are defined in dialogs package as constants named
+after the dialog purpose:
+.RS
+.IP \(bu
+::dialogs::typeAlertError define an error dialog
+.IP \(bu
+::dialogs::typeAlertWarning define a warning dialog
+.IP \(bu
+::dialogs::typeAlertInfo define an info dialog
+.IP \(bu
+::dialogs::typeAlertAuth define an authentication dialog
+.RE
+.sp
+BUTTONS
+.sp
+You can customizing buttons defining an array describing them.
+Array's keys is each button's position index (0 is the left most one)
+and each element is a list composed by button's text and icons.
+.TP
+\fB::dialogs::error\fR \fIparent\fR \fIalertMsg\fR ?\fIinfoMsg\fR? ?\fIbuttons\fR?
+Display an error alert when a user-requested operation
+cannot be sucessfully completed or whenever you want to
+signal a critical situation. By default it contains an
+error icon, an alert message (\fIalertMsg\fR) and its
+details (?\fIinfoMsg\fR?) and an ok button
+(button's text will be translated using \fBmc\fR command
+if available). The dialog will be created as \fIparent\fR's child.
+You can customize button(s) shown specifing a value for
+\fIbuttons\fR as described early in BUTTONS.
+It returns the index of the button used to dismiss the dialog.
+.TP
+\fB::dialogs::warning\fR \fIparent\fR \fIalertMsg\fR ?\fIinfoMsg\fR? ?\fIokTxt\fR??\fIbuttons\fR?
+Present a confirmation alert when the user's command
+may destroy their data, create a security risk or such.
+By default it contains a warning icon, an alert message
+(\fIalertMsg\fR), its details (?\fIinfoMsg\fR?) and
+two buttons: cancel and ok (ok button's text will be
+provided by the user via \fIokTxt\fR argument), if the
+user dosen't specify it ok will be used. As for
+\fB::dialogs::error\fR \fBmc\fR command will used to
+translate "fixed" (i.e. not provided by the user)
+text buttons. The dialog will be created as \fIparent\fR's
+child.
+You can customize button(s) shown specifing a value for
+\fIbuttons\fR as described early in BUTTONS.
+It returns the index of the button used to dismiss the dialog.
+.TP
+\fB::dialogs::info\fR \fIparent\fR \fIalertMsg\fR ?\fIinfoMsg\fR? ?\fIbuttons\fR?
+Present an information alert, use it when the user must
+know the information presented before continuing, or has
+specifically requested the information.
+By default it contains an information icon, a message
+(\fIalertMsg\fR), its details (?\fIinfoMsg\fR?) and an
+ok button. The dialog will be created as \fIparent\fR's child.
+You can customize button(s) shown specifing a value for
+\fIbuttons\fR as described early in BUTTONS.
+It returns the index of the button used to dismiss the dialog.
+.TP
+\fB::dialogs::confirmsave\fR \fIparent\fR \fIalertMsg\fR ?\fIinfoMsg\fR? ?\fIbuttons\fR?
+Present a save confirmation alert.
+Save confirmation alerts help ensure that users do not
+lose document changes when they close applications. This
+makes closing applications a less dangerous operation.
+By default it contains a warning icon, an alert message (\fIalertMsg\fR),
+its details (?\fIinfoMsg\fR?) and three buttons:
+'Close without Saving', 'Cancel' and 'Save'. The dialog
+will be created as \fIparent\fR's child.
+You can customize button(s) shown specifing a value for
+\fIbuttons\fR as described early in BUTTONS.
+It returns the index of the button used to dismiss the dialog.
+.TP
+\fB::dialogs::auth\fR \fIparent\fR \fIalertMsg\fR ?\fIinfoMsg\fR? ?\fIuserName\fR? ?\fIloginTxt\fR? ?\fIbuttons\fR?
+Authentication alerts prompt the user for information
+necessary to gain access to protected resources, such
+as their username or password.
+The dialog will be created as \fIparent\fR's child.
+Using \fIloginTxt\fR you can set the 'ok' button text, by
+default it'll be setted to 'Login'.
+You can customize button(s) shown specifing a value for
+\fIbuttons\fR as described early in BUTTONS.
+It returns the index of the button used to dismiss the dialog.
+.TP
+\fB::dialogs::getIconsTheme\fR
+Returns the current icons theme used while building
+dialog's icons.
+.TP
+\fB::dialogs::setIconsTheme\fR \fItheme\fR
+Set the icons theme to be used while building dialog's icons.
+.SH "EXAMPLES"
+A simple example follows. Here an info dialog
+will drawn as .'s child to inform you that you've
+an appointment with Franz.
+.PP
+.nf
+   package require dialogs
+   ::dialogs::info . "You've an appointment with Franz"
+.fi
+.SH "KEYWORDS"
+dialogs
+.SH "COPYRIGHT"
+.nf
+Copyright (c) 2006, Matteo Centenaro <bugant@users.berlios.de>
+.fi

@@ -1,0 +1,75 @@
+[manpage_begin icons n 0.1]
+[copyright {2006, Matteo Centenaro <bugant@users.berlios.de>}]
+[moddesc   {Application icons management}]
+[titledesc {Icons management library supporting various icons' themes}]
+[require Img]
+[require xml]
+[require icons [opt 0.1]]
+[description]
+[para]
+
+This package provides commands to build icons and use them on your Tk applications.
+You can use any Tango  compilant (with respect to its naming specs) icons theme.
+It uses an xml file to define available icons and their names taking them to Tango's
+[uri http://standards.freedesktop.org/icon-naming-spec/icon-naming-spec-latest.html "naming specification"].
+
+[section COMMANDS]
+[list_begin definitions]
+[call [cmd ::icons::init] [arg theme] [opt [arg conf]]]
+
+Initialise the icons library using the [arg theme] as icons' theme.
+A [arg theme] is simply a directory name containing the icon-set you
+want to use. The [arg theme] is searched as specified by the [file icons.xml]
+file. If [opt [arg conf]] argument is passed then that path will be
+used as configuration file insetead of [file icons.xml]. By default if
+no [opt [arg conf]] will be given [file icons.xml] on the icons library
+directory will be used.
+
+[nl]
+Possible return values:
+
+[list_begin definitions]
+[lst_item 0]
+Icons theme has been initialized, you can now create and use your icon-set.
+[lst_item -1]
+The [arg theme] supplied is not a valid theme, may be you've to properly
+set the basedir property on your [file icons.xml].
+[list_end]
+
+[call [cmd ::icons::createImage] [arg name] [arg size]]
+
+Create an image via the [cmd "image create"] command, called [arg name]
+of the specified [arg size]. Names are defined in the [file icons.xml]
+file but they follow Tango 
+[uri http://standards.freedesktop.org/icon-naming-spec/icon-naming-spec-latest.html "naming specification"]
+as well as for sizes.
+
+[nl]
+Possible return values:
+
+[list_begin definitions]
+[lst_item 0]
+[arg name] icon has been created and you can now use it on your
+Tk applications.
+[lst_item -1]
+[arg name] icon cannot be created and the default missing icon is
+not available too.
+[list_end]
+
+[list_end]
+
+[section EXAMPLES]
+A simple example follows. Here a Tango theme will be used
+and a document_save icons created and used on a button.
+
+[para]
+
+[example {
+   package require icons
+   ::icons::init Tango
+   ::icons::createImage "document_save" "22x22"
+   set bt [button .bt -image document_save -text "Save it" -compound left]
+}]
+
+[keywords icons image]
+[manpage_end]

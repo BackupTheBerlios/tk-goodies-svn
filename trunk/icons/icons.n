@@ -1,0 +1,83 @@
+'\"
+'\" Generated from file 'icons.man' by tcllib/doctools with format 'nroff'
+'\" Copyright (c) 2006, Matteo Centenaro <bugant@users.berlios.de>
+'\"
+.so man.macros
+.TH "icons" n 0.1 icons "Application icons management"
+.BS
+.SH "NAME"
+icons \- Icons management library supporting various icons' themes
+.SH "SYNOPSIS"
+package require \fBImg \fR
+.sp
+package require \fBxml \fR
+.sp
+package require \fBicons  ?0.1?\fR
+.sp
+\fB::icons::init\fR \fItheme\fR ?\fIconf\fR?
+.sp
+\fB::icons::createImage\fR \fIname\fR \fIsize\fR
+.sp
+.BE
+.SH "DESCRIPTION"
+.PP
+This package provides commands to build icons and use them on your Tk applications.
+You can use any Tango  compilant (with respect to its naming specs) icons theme.
+It uses an xml file to define available icons and their names taking them to Tango's
+\fInaming specification\fR [http://standards.freedesktop.org/icon-naming-spec/icon-naming-spec-latest.html].
+.SH "COMMANDS"
+.TP
+\fB::icons::init\fR \fItheme\fR ?\fIconf\fR?
+Initialise the icons library using the \fItheme\fR as icons' theme.
+A \fItheme\fR is simply a directory name containing the icon-set you
+want to use. The \fItheme\fR is searched as specified by the "\fIicons.xml\fR"
+file. If ?\fIconf\fR? argument is passed then that path will be
+used as configuration file insetead of "\fIicons.xml\fR". By default if
+no ?\fIconf\fR? will be given "\fIicons.xml\fR" on the icons library
+directory will be used.
+.sp
+Possible return values:
+.RS
+.TP
+0
+Icons theme has been initialized, you can now create and use your icon-set.
+.TP
+-1
+The \fItheme\fR supplied is not a valid theme, may be you've to properly
+set the basedir property on your "\fIicons.xml\fR".
+.RE
+.TP
+\fB::icons::createImage\fR \fIname\fR \fIsize\fR
+Create an image via the \fBimage create\fR command, called \fIname\fR
+of the specified \fIsize\fR. Names are defined in the "\fIicons.xml\fR"
+file but they follow Tango
+\fInaming specification\fR [http://standards.freedesktop.org/icon-naming-spec/icon-naming-spec-latest.html]
+as well as for sizes.
+.sp
+Possible return values:
+.RS
+.TP
+0
+\fIname\fR icon has been created and you can now use it on your
+Tk applications.
+.TP
+-1
+\fIname\fR icon cannot be created and the default missing icon is
+not available too.
+.RE
+.SH "EXAMPLES"
+A simple example follows. Here a Tango theme will be used
+and a document_save icons created and used on a button.
+.PP
+.nf
+   package require icons
+   ::icons::init Tango
+   ::icons::createImage "document_save" "22x22"
+   set bt [button .bt -image document_save -text "Save it" -compound left]
+.fi
+.SH "KEYWORDS"
+icons, image
+.SH "COPYRIGHT"
+.nf
+Copyright (c) 2006, Matteo Centenaro <bugant@users.berlios.de>
+.fi

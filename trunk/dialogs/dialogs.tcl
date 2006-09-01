@@ -112,10 +112,15 @@ proc ::dialogs::alert {w type btSel buttons alertTxt {infoTxt ""}} {
 
 	set bts [frame $w.bts]
 
+	set defaultButton ""
 	foreach val [lsort [array names btsa]] {
 		set curr $btsa($val)
 		set txt [lindex $curr 0]
 		set icoName [lindex $curr 1]
+
+		if {$val == $btSel} {
+			set defaultButton $bts.bt$val
+		}
 
 		if {$icoName ne ""} {
 			::icons::createImage $icoName $::dialogs::alertBtnSize
@@ -173,7 +178,11 @@ proc ::dialogs::alert {w type btSel buttons alertTxt {infoTxt ""}} {
 	wm deiconify $w
 	wm resizable $w false false
 	tkwait visibility $w
-	focus -force $w
+	if {$defaultButton ne ""} {
+		focus -force $defaultButton
+	} else {
+		focus -force $w
+	}
 	grab $w
 
 	tkwait window $w
@@ -283,7 +292,7 @@ proc ::dialogs::warning {parent alertMsg {infoMsg ""} {okTxt ""} {buttons ""}} {
 		set bts(1) $btok
 	}
 
-	return [::dialogs::alert $w $::dialogs::typeAlertWarning 0 [array get bts] \
+	return [::dialogs::alert $w $::dialogs::typeAlertWarning 1 [array get bts] \
 		$alertMsg $infoMsg]
 }
 

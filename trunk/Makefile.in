@@ -13,11 +13,11 @@ all:
 
 install-icons:
 	mkdir -p ${libdir}/icons
-	cp -a icons/* ${libdir}/icons/
+	cp -r icons/* ${libdir}/icons/
 
 install-dialogs:
 	mkdir -p ${libdir}/dialogs
-	cp -a dialogs/* ${libdir}/dialogs/
+	cp -r dialogs/* ${libdir}/dialogs/
 
 install: install-icons install-dialogs
 

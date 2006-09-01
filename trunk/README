@@ -1,0 +1,32 @@
+README
+
+tk-goodies provides a set of Tcl/Tk packages
+to build GUI in an easy and powerfull way.
+
+For more info visit http://tk-goodies.berlios.org
+
+INSTALL
+
+To install tk-goodies just follows the usual steps:
+
+1) ./configure
+2) make install
+
+The installed icons package has an icons.xml file
+which basedir is setted to "." so you'll have to
+place your icon-sets in the same directory as icons
+package. If you want, do so otherwise properly set
+basedir to point to the dir containing your icon-sets.
+
+To use icons you need a Tango compilant icon-set, you
+can use for example the one you find at the following
+url.
+http://art.gnome.org/themes/icon/1150
+
+You can try to make your own icon-set Tango compilant
+using the naming-tools provided by the Tango project;
+take a look at the following url for more info.
+http://tango.freedesktop.org/Tango_Icon_Library#Download
+
+Enjoy tk-goodies,
+bugant <bugant@users.berlios.de>

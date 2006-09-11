@@ -106,6 +106,7 @@ proc ::dialogs::alert {w type btSel buttons alertTxt {infoTxt ""}} {
 	::icons::init $::dialogs::iconsTheme
 	::icons::createImage $typeIcon $::dialogs::alertIconSize
 
+	set typeIcon $typeIcon$::dialogs::alertIconSize
 	set ico [label $w.ico -image $typeIcon]
 	set aTxt [message $w.altxt -font $::dialogs::alertFont -text $alertTxt -width 384]
 	set iTxt [message $w.intxt -font $::dialogs::infoFont -text $infoTxt -width 384]
@@ -124,6 +125,7 @@ proc ::dialogs::alert {w type btSel buttons alertTxt {infoTxt ""}} {
 
 		if {$icoName ne ""} {
 			::icons::createImage $icoName $::dialogs::alertBtnSize
+			set icoName $icoName$::dialogs::alertBtnSize
 		}
 
 		set bt [button $bts.bt$val -text $txt -compound left \

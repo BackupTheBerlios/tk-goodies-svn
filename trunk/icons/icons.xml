@@ -4,6 +4,7 @@
 	<icon name="ok" context="actions" img="go-next.png"/>
 	<icon name="cancel" context="actions" img="stock_stop.png"/>
 	<icon name="stop" context="actions" img="stock_stop.png"/>
+	<icon name="edit_clear" context="actions" img="edit-clear.png"/>
 
 	<icon name="address_book_new" context="actions" img="address-book-new.png"/>
 	<icon name="application_exit" context="actions" img="application-exit.png"/>
@@ -96,7 +97,6 @@
 	<icon name="zoom_in" context="actions" img="zoom-in.png"/>
 	<icon name="zoom_original" context="actions" img="zoom-original.png"/>
 	<icon name="zoom_out" context="actions" img="zoom-out.png"/>
-	<icon name="" context="actions" img=".png"/>
 
 	<icon name="accessories_calculator" context="apps" img="accessories-calculator.png"/>
 	<icon name="accessories_character_map" context="apps" img="accessories-character-map.png"/>
@@ -114,8 +114,8 @@
 	<icon name="preferences_desktop_wallpaper" context="apps" img="preferences-desktop-wallpaper.png"/>
 	<icon name="system_file_manager" context="apps" img="system-file-manager.png"/>
 	<icon name="system_software_update" context="apps" img="system-software-update.png"/>
+	<icon name="utilities_system_monitor" context="apps" img="utilities-system-monitor.png"/>
 	<icon name="utilities_terminal" context="apps" img="utilities-terminal.png"/>
-	<icon name="" context="apps" img=".png"/>
 
 	<icon name="applications_accessories" context="categories" img="applications-accessories.png"/>
 	<icon name="applications_development" context="categories" img="applications-development.png"/>

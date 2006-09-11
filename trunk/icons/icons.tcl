@@ -68,8 +68,12 @@ proc ::icons::init {theme {conf ""}} {
 }
 
 proc ::icons::createImage {name size} {
+	set name [string trim $name]
+	set size [string trim $size]
+
 	set path $::icons::icons($name)
 	set path [file join $::icons::basedir $size $path]
+	set name "$name$size"
 	if {[catch {image create photo $name -file $path} err]} {
 		puts "Couldn't create icon $name from file $path: $err"
 		# let's get the default icon

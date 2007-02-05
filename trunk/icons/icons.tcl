@@ -71,7 +71,7 @@ proc ::icons::createImage {name size} {
 	set name [string trim $name]
 	set size [string trim $size]
 
-	set path $::icons::icons($name)
+	if {[catch {set path $::icons::icons($name)}]} {set path $::icons::icons(image_missing)}
 	set path [file join $::icons::basedir $size $path]
 	set name "$name$size"
 	if {[catch {image create photo $name -file $path} err]} {

@@ -468,7 +468,7 @@ proc ::dialogs::auth {parent alertMsg {infoMsg ""} {userName ""} {loginTxt ""} {
 	::icons::init $::dialogs::iconsTheme
 	::icons::createImage $typeIcon $::dialogs::alertIconSize
 
-	set ico [label $w.ico -image $typeIcon]
+	set ico [label $w.ico -image  $typeIcon$::dialogs::alertIconSize]
 	set aTxt [message $w.altxt -font $::dialogs::alertFont -text $alertMsg -width 384]
 	set iTxt [message $w.intxt -font $::dialogs::infoFont -text $infoMsg -width 384]
 
@@ -509,7 +509,7 @@ proc ::dialogs::auth {parent alertMsg {infoMsg ""} {userName ""} {loginTxt ""} {
 		]
 
 		if {$icoName ne ""} {
-			$bt configure -image $icoName
+			$bt configure -image $icoName$::dialogs::alertBtnSize
 		}
 
 		bind $bt <Return> {%W invoke}
